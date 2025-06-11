@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScrollingObject : MonoBehaviour
 {
-    public float speed = 15f;
+    public float speed = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,5 +17,6 @@ public class ScrollingObject : MonoBehaviour
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
+        
     }
 }

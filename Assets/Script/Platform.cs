@@ -9,6 +9,7 @@ public class Platform : MonoBehaviour
 
     void OnEnable()
     {
+        stepped = false;
         for (int i = 0; i < obstacles.Length; i++)
         {
             if (Random.Range(0, 2) == 0)

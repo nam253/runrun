@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BackgroundLoop : MonoBehaviour
 {
-    float with;
+    float width;
 
     void Awake()
     {
         BoxCollider2D backgroundCollider = GetComponent<BoxCollider2D>();
-        with = backgroundCollider.size.x;
+        width = backgroundCollider.size.x;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +20,7 @@ public class BackgroundLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x <= -with)
+        if (transform.position.x <= -width)
         {
             Reposition();
         }
@@ -28,7 +28,7 @@ public class BackgroundLoop : MonoBehaviour
 
     void Reposition()
     {
-        Vector2 offset = new Vector2(with * 2f, 0);
+        Vector2 offset = new Vector2(width * 2f, 0);
         transform.position = (Vector2)transform.position + offset;
     }
 }

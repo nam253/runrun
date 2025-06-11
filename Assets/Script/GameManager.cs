@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isGameover = false;
     public TextMeshProUGUI scoreText;
     public GameObject gameoverUI;
+    public AudioSource backgroundMusic;
 
     private int score = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         {
             score += newScore;
             scoreText.text = "Score : " + score;
+            
         }
 
     }
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         isGameover = true;
         gameoverUI.SetActive(true);
+        backgroundMusic.enabled = false;
 
     }
 }

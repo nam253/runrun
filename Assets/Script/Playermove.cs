@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Playermove : MonoBehaviour
 {
@@ -8,7 +10,16 @@ public class Playermove : MonoBehaviour
 
     public GameObject canvas;
 
+    public TalkManager talkManager;
+
+    public GameObject scanObject;
+
     private bool hasReachedTarget = false;
+
+    public Text talkText;
+
+
+    public int talkIndex;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +39,7 @@ public class Playermove : MonoBehaviour
         {
             float xDistanceToTarget = Mathf.Abs(transform.position.x - targetStopPoint.position.x);
 
-            
+
 
 
             if (xDistanceToTarget <= 0.1f)
@@ -36,11 +47,11 @@ public class Playermove : MonoBehaviour
                 StopMovementAndIdel();
             }
             else
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
         }
-        }
-        
+
     }
 
     void StopMovementAndIdel()
@@ -54,8 +65,23 @@ public class Playermove : MonoBehaviour
 
         if (canvas != null)
         {
+            objData objData = scanObject.GetComponent<objData>();
+            Talk(objData.id);
             canvas.SetActive(true);
         }
 
+    }
+
+    void Talk(int id)
+    {
+        string taklData = talkManager.GetTalk(id, talkIndex);
+
+        if (taklData == null)
+        {
+            return;
+        }
+        talkText.text = taklData;
+        talkIndex++;
+        
     }
 }

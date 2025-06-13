@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // 텍스트를 사용하기 위해 
 
 public class Playermove : MonoBehaviour
 {
@@ -8,18 +8,12 @@ public class Playermove : MonoBehaviour
     public Transform targetStopPoint;
     public Animator playerAnimator;
 
-    public GameObject canvas;
-
-    public TalkManager talkManager;
-
     public GameObject scanObject;
 
     private bool hasReachedTarget = false;
 
-    public Text talkText;
 
 
-    public int talkIndex;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +22,6 @@ public class Playermove : MonoBehaviour
             playerAnimator.SetBool("isWalking", true);
         }
 
-        canvas.SetActive(false);
 
     }
 
@@ -40,19 +33,23 @@ public class Playermove : MonoBehaviour
             float xDistanceToTarget = Mathf.Abs(transform.position.x - targetStopPoint.position.x);
 
 
-
-
             if (xDistanceToTarget <= 0.1f)
             {
                 StopMovementAndIdel();
+
             }
             else
             {
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
+
             }
+        
         }
 
+
     }
+
+    
 
     void StopMovementAndIdel()
     {
@@ -61,27 +58,19 @@ public class Playermove : MonoBehaviour
         if (playerAnimator != null)
         {
             playerAnimator.SetBool("isWalking", false);
+            
         }
 
-        if (canvas != null)
+        if (scanObject != null) // 캐릭터가 멈추면 talkmanager를 통해 대화를 시작
         {
             objData objData = scanObject.GetComponent<objData>();
-            Talk(objData.id);
-            canvas.SetActive(true);
+            if (objData != null && TalkManager.Instance != null) //objectData의 id를 talkmanager에 전달하여 대화를 시작
+            {
+                TalkManager.Instance.StartTalk(objData.id);
+            }
         }
 
     }
 
-    void Talk(int id)
-    {
-        string taklData = talkManager.GetTalk(id, talkIndex);
-
-        if (taklData == null)
-        {
-            return;
-        }
-        talkText.text = taklData;
-        talkIndex++;
-        
-    }
+    
 }

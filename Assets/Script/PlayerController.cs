@@ -23,24 +23,18 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+     void Update()
     {
         if (isDead)
         {
             return;
         }
 
-        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
+        if (Input.GetButtonDown("Jump"))
         {
-            jumpCount++;
-
-            playerRigidbody.linearVelocity = Vector2.zero;
-
-            playerRigidbody.AddForce(new Vector2(0, jumpForce));
-
-            playerAudio.Play();
+            TryJump();
         }
-        else if (Input.GetMouseButtonUp(0) && playerRigidbody.linearVelocity.y > 0)
+        else if (Input.GetButtonUp("Jump") && playerRigidbody.linearVelocity.y > 0)
         {
             playerRigidbody.linearVelocity = playerRigidbody.linearVelocity * 0.5f;
         }
@@ -48,6 +42,32 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Grounded", isGrounded);
 
     }
+
+    public void JumpButtonOnclick()
+    {
+        if (isDead)
+        {
+            return;
+        }
+        TryJump();
+
+    }
+
+    void TryJump()
+    {
+        if (jumpCount < 2)
+        {
+            jumpCount++;
+            playerRigidbody.linearVelocity = Vector2.zero;
+            playerRigidbody.AddForce(new Vector2(0, jumpForce));
+
+            if (playerAudio != null)
+            {
+                playerAudio.Play();
+            }
+        }
+    }
+
 
     void Die()
     {

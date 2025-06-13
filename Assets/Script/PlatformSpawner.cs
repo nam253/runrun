@@ -10,8 +10,8 @@ public class PlatformSpawner : MonoBehaviour
     public float timeBestSpawnMax = 2.25f;
     private float timeBestSpawn;
 
-    public float yMin = -3.5f;
-    public float yMax = 1.5f;
+    public float yMin = -5.7f;
+    public float yMax = 0.35f;
     private float xPos = 20f;
 
     private GameObject[] platforms;

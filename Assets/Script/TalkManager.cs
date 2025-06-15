@@ -1,12 +1,12 @@
-using System.Collections.Generic; //코루틴을 위해 추
+using System.Collections.Generic; //코루틴을 위해 추가
 using System.Collections;
-using UnityEngine.UI;//텍스트를 사용하기 위해 추
+using UnityEngine.UI;//텍스트를 사용하기 위해 추가
 using UnityEngine;
 
 public class TalkManager : MonoBehaviour
 {
-    public static TalkManager Instance { get; private set; }//다른 스크립트에서 접근하기 위해 싱글톤 사ㅇ
-    Dictionary<int, string[]> talkData; //대화 데이터 저장
+    public static TalkManager Instance { get; private set; }//다른 스크립트에서 접근하기 위해 싱글톤 사용, get는 다른 스크립트가 읽을수 있도록 , private set은 내부에서만 수정 가능하도록
+    Dictionary<int, string[]> talkData; //대화 데이터 저장, int는 키값 (누구인지를식별)
 
     //public Text dialogueTextUI; // 인스펙터에서 연결할 ui txt컴포넌트
 
@@ -47,13 +47,13 @@ public class TalkManager : MonoBehaviour
 
         if (typeEffect == null)
         {
-            typeEffect = dialoguePanelUI.GetComponentInChildren<TypeEffect>();
+            typeEffect = dialoguePanelUI.GetComponentInChildren<TypeEffect>(); //dialoguePanelUI 자식 중 TypeEffect라는 타입 컴폰너트를 찾아 할당해라
         }
     }
 
     void GenerateData()
     {
-        talkData.Add(1000, new string[] { "안녕? 여우야", "그거 알아?", "이 숲에 슬라임들의 숫자가 엄청 늘어났어", "숲을 돌아다닐 땐 조심해" });
+        talkData.Add(1000, new string[] { "안녕? 여우야", "그거 알아?", "이 숲에 슬라임들의 숫자가 엄청 늘어났어", "숲을 돌아다닐 땐 조심해" }); //키값과 문자열들
         //대화 데이터 추가
     }
 
@@ -66,46 +66,46 @@ public class TalkManager : MonoBehaviour
         {
             dialoguePanelUI.SetActive(true); // 대화창 활성화 
         }
-        isDialogueActive = true; // 대화 시작
+        isDialogueActive = true; // 대화 활성화 상태로 설정
 
         DisplayNextTalk(); // 첫 대사 표시
     }
 
     void DisplayNextTalk()
     {
-        if (isTypingEffectPlaying)
+        if (isTypingEffectPlaying)//타이핑 진행 중인지 확인
         {
             if (typeEffect != null)
             {
-                typeEffect.CompleteTyping();
+                typeEffect.CompleteTyping();//typeEffect 스크립트에서CompleteTyping 접근해서 타이핑을 완료
             }
-            isTypingEffectPlaying = false;
+            isTypingEffectPlaying = false;//타이핑 상태 종료
             return;
         }
 
-        if (currentTalkIndex >= talkData[currentTalkId].Length)
+        if (currentTalkIndex >= talkData[currentTalkId].Length) //모든 대사를 다 표시 했는지 확인
         {
-            EndTalk();
+            EndTalk();//다 했다면 종료 함수 호출
             return;
         }
 
-        string nextSentence = talkData[currentTalkId][currentTalkIndex];
+        string nextSentence = talkData[currentTalkId][currentTalkIndex];//다음 대사 문자열 가져오기
 
         if (typeEffect != null)
         {
-            typeEffect.SetMsg(nextSentence);
-            isTypingEffectPlaying = true;
+            typeEffect.SetMsg(nextSentence); //TypeEffect에 다음 대사 설정 (타이핑 효과 시작)
+            isTypingEffectPlaying = true; //타이핑 효과 진행 중 상태로 변경
         }
 
-        currentTalkIndex++;
+        currentTalkIndex++; //다음 대사를 위한 인덱스 증가
 
-            
-        
+
+
     }
     void EndTalk() // 대화 종료 함수
     {
         isDialogueActive = false; // 대화 종료
-        isTypingEffectPlaying = false;
+        isTypingEffectPlaying = false;//타이핑 효과 종료 상태로 설정
 
         if (startbutton != null)
         {

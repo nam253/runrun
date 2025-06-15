@@ -17,9 +17,9 @@ public class Playermove : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (playerAnimator != null)
+        if (playerAnimator != null)//animator가 null이 아니라면
         {
-            playerAnimator.SetBool("isWalking", true);
+            playerAnimator.SetBool("isWalking", true); //걷는 애니메이션을 해라
         }
 
 
@@ -28,12 +28,12 @@ public class Playermove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasReachedTarget && targetStopPoint != null)
+        if (!hasReachedTarget && targetStopPoint != null)//!hasReachedTarget는 false가 맞고 즉 hasReachedTarget 상태가 아니고  targetstoppoint가 null이아니라면
         {
-            float xDistanceToTarget = Mathf.Abs(transform.position.x - targetStopPoint.position.x);
+            float xDistanceToTarget = Mathf.Abs(transform.position.x - targetStopPoint.position.x); //Mathf.abs는 절댓값을 반화한는 함수
 
 
-            if (xDistanceToTarget <= 0.1f)
+            if (xDistanceToTarget <= 0.1f) //거리가 가까워지면
             {
                 StopMovementAndIdel();
 
@@ -57,16 +57,16 @@ public class Playermove : MonoBehaviour
 
         if (playerAnimator != null)
         {
-            playerAnimator.SetBool("isWalking", false);
+            playerAnimator.SetBool("isWalking", false); 
             
         }
 
         if (scanObject != null) // 캐릭터가 멈추면 talkmanager를 통해 대화를 시작
         {
-            objData objData = scanObject.GetComponent<objData>();
+            objData objData = scanObject.GetComponent<objData>(); //objData 타입이름 objData 변수이름
             if (objData != null && TalkManager.Instance != null) //objectData의 id를 talkmanager에 전달하여 대화를 시작
             {
-                TalkManager.Instance.StartTalk(objData.id);
+                TalkManager.Instance.StartTalk(objData.id); //인스턴스화된 TalkManage에 rStartTalk함수로 가서 변수 objData의 값을 id를 전달
             }
         }
 

@@ -12,6 +12,8 @@ public class Playermove : MonoBehaviour
 
     private bool hasReachedTarget = false;
 
+    public AudioSource walkAudioSource;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +22,13 @@ public class Playermove : MonoBehaviour
         if (playerAnimator != null)//animator가 null이 아니라면
         {
             playerAnimator.SetBool("isWalking", true); //걷는 애니메이션을 해라
+            if(walkAudioSource != null && !walkAudioSource.isPlaying)
+            {
+                walkAudioSource.loop = true;
+                walkAudioSource.Play();
+            }
         }
+
 
 
     }
@@ -41,6 +49,11 @@ public class Playermove : MonoBehaviour
             else
             {
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
+                if (playerAnimator != null && playerAnimator.GetBool("isWalking") && walkAudioSource != null && !walkAudioSource.isPlaying)
+                {
+                    walkAudioSource.loop = true;
+                    walkAudioSource.Play();
+                }
 
             }
         
@@ -57,8 +70,12 @@ public class Playermove : MonoBehaviour
 
         if (playerAnimator != null)
         {
-            playerAnimator.SetBool("isWalking", false); 
-            
+            playerAnimator.SetBool("isWalking", false);
+            if (walkAudioSource != null && walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Stop();
+            }
+
         }
 
         if (scanObject != null) // 캐릭터가 멈추면 talkmanager를 통해 대화를 시작

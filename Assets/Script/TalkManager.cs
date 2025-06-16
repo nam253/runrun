@@ -53,7 +53,7 @@ public class TalkManager : MonoBehaviour
 
     void GenerateData()
     {
-        talkData.Add(1000, new string[] { "안녕? 여우야", "그거 알아?", "이 숲에 슬라임들의 숫자가 엄청 늘어났어", "숲을 돌아다닐 땐 조심해" }); //키값과 문자열들
+        talkData.Add(1000, new string[] { "안녕? 여우야", "그거 알아?", "이 숲에 슬라임들의 숫자가 엄청나게 늘어났어", "숲을 돌아다닐 땐 조심해" }); //키값과 문자열들
         //대화 데이터 추가
     }
 

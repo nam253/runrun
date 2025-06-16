@@ -12,7 +12,7 @@ public class Platform : MonoBehaviour
         stepped = false;
         for (int i = 0; i < obstacles.Length; i++)
         {
-            if (Random.Range(0, 2) == 0)
+            if (Random.Range(0, 3) == 0)
             {
                 obstacles[i].SetActive(true);
             }
@@ -29,7 +29,7 @@ public class Platform : MonoBehaviour
         if (collision.collider.tag == "Player" && !stepped)
         {
             stepped = true;
-            GameManager.instance.AddScore(100);
+            //GameManager.instance.AddScore(100);
         }
     }
     void Start()

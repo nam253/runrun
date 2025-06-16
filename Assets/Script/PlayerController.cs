@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void TryJump()
     {
-        if (jumpCount < 2)
+        if (jumpCount < 3)
         {
             jumpCount++;
             playerRigidbody.linearVelocity = Vector2.zero;

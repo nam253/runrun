@@ -4,15 +4,15 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platformPrefab;
-    public int count = 2;
+    public int count = 4;
 
     public float timeBestSpawnMin = 1.25f;
     public float timeBestSpawnMax = 2.25f;
     private float timeBestSpawn;
 
     public float yMin = -5.7f;
-    public float yMax = 0.35f;
-    private float xPos = 20f;
+    public float yMax = 1f;
+    private float xPos = 25f;
 
     private GameObject[] platforms;
     private int currentIndex = 0;

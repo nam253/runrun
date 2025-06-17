@@ -42,6 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: b
+    uniqueID: 3572740605
+    locked: 0
+  - name: a
+    uniqueID: 1945060623
+    locked: 0
+  - name: c
+    uniqueID: 3140247629
+    locked: 0
+  - name: k
+    uniqueID: 115569265
+    locked: 0
   - name: Background
     uniqueID: 2239922613
     locked: 0
